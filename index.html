@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate us</title>
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        colors: {
+          'orange': '#FF7F0F',
+          'hoverOrange': '#E8730C',
+          'white': 'hsl(0, 0%, 100%)',
+          'lightGrey': 'hsl(217, 12%, 63%)',
+          'mediumGrey': 'hsl(216, 12%, 54%)',
+          'greyRate': 'hsl(240, 7%, 23%)',
+          'darkBlue': 'hsl(213, 19%, 18%)',
+          'veryDarkBlue': 'hsl(216, 12%, 8%)'
+        },
+        fontSize: {
+          sm: '14px',
+          lg: '20px'
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+  <main class="w-screen h-screen bg-veryDarkBlue flex justify-center items-center">
+    <div class="w-80 h-[340px] px-5 py-2 bg-darkBlue rounded-2xl flex flex-col justify-evenly items-center">
+      <div id="boxRatio" class="w-full h-full flex flex-col justify-evenly items-center">
+        <!-- star icon -->
+        <div class="w-8 h-8 bg-greyRate rounded-3xl self-start flex justify-center items-center">
+          <img src="./assets/icon-star.svg" alt="Gold star icon">
+        </div>
+        <!-- CTA -->
+        <div class="w-full">
+          <h3 class="mb-2 text-white text-lg font-bold">How did we do?</h3>
+          <p class="text-lightGrey text-sm font-normal">Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!</p>
+        </div>
+        <div id="rateBox" class="w-full my-4 flex flex-row justify-center items-center"></div>
+        <button id="btnSubmit" class="w-11/12 h-10 mb-2 bg-orange hover:bg-hoverOrange text-white text-center font-normal rounded-3xl">SUBMIT</button>
+      </div>
+
+      <div id="boxThankYou" class="w-full h-full flex flex-col justify-evenly items-center">
+        <img src="./assets/illustration-thank-you.svg" alt="Illustration of a cellphone receiving a feedback">
+        <div class="w-[170px] h-[30px] bg-greyRate rounded-3xl flex justify-center items-center">
+          <p id="whichOptionWasChosen" class="text-orange text-sm font-normal"></p>
+        </div>
+  
+        <div class="text-center">
+          <p class="mb-2 text-white text-lg font-bold">Thank you!</p>
+          <p class="text-lightGrey text-sm font-normal">We appreciate you taking the time to give a rating. If you ever need more support, don't hesitate to get in touch!</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const boxThankYou = document.getElementById('boxThankYou');
+    const boxRatio = document.getElementById('boxRatio');
+    boxThankYou.style.display = 'none';
+    const rateBox = document.getElementById('rateBox');
+    let choice = 0;
+    
+    for(let i=0; i<5; i++) {
+      const divNumberRateBox = document.createElement('button');
+      const spanNumberRateBox = document.createElement('span');
+      divNumberRateBox.className = 'w-11 h-11 mr-3 bg-greyRate focus:bg-orange focus:text-white text-lightGrey rounded-3xl flex justify-center items-center';
+      divNumberRateBox.setAttribute('id', i+1);
+      spanNumberRateBox.innerHTML = i+1;
+      divNumberRateBox.appendChild(spanNumberRateBox);
+
+      divNumberRateBox.onclick = () => {
+        choice = i+1;
+      };
+
+      rateBox.appendChild(divNumberRateBox);
+    }
+
+    const btnSubmit = document.getElementById('btnSubmit');
+    btnSubmit.onclick = () => {
+      const whichOptionWasChosen = document.getElementById('whichOptionWasChosen');
+      whichOptionWasChosen.innerText = `You selected ${choice} out of 5`;
+      boxRatio.style.display = 'none';
+      boxThankYou.style.display = 'flex';
+    };
+  </script>
+</body>
+</html>
